@@ -1,34 +1,67 @@
 import React from 'react';
 import Pokemon from './Pokemon';
+import Button from './Button';
+import ButtonType from './ButtonType';
+import './pokedex.css';
 
 class Pokedex extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            position: 0
+            position: 0,
+            pokemons: false,
         }
 
-        this.nextPokemon = this.nextPokemon.bind(this);
+        this.setIndex = this.setIndex.bind(this);
+        this.setPokemons = this.setPokemons.bind(this);
+        this.filterPokemons = this.filterPokemons.bind(this);
     }
 
-    nextPokemon() {
-      const { pokemon } = this.props;
-      this.setState((previosState, _props) => {
-          const { position } = previosState;
-          const indexAtual = position === pokemon.length - 1 ? 0 : position + 1;
-          return { ...previosState, position: indexAtual};
-      });
-    };
+    setIndex(value) {
+        this.setState(() => ({
+          position: value,
+        }));
+    }
+
+    setPokemons(value) {
+        this.setState(() => ({
+          pokemons: value,
+        }));
+    }
+
+    filterPokemons() {
+        return this.props.pokemons
+        .filter(({ type }) => type === this.state.pokemons || !this.state.pokemons);
+    }
+
+
 
     render() {
+
+        const values = {
+            position: this.state.position,
+            statePokemon: this.state.pokemons,
+            setIndex: this.setIndex,
+            setPokemons: this.setPokemons,
+            pokemons: this.filterPokemons(),
+        }
+
+        const filterTypes = [...this.props.pokemons].map(({ type}) => type);
+        const listTypes = filterTypes.filter((type, index, array) => array.indexOf(type) === index);
+        const btnsType = listTypes.map((types, index) => <ButtonType key={index} values={values} type={types} />);
+
         return (
             <main>
                 <div className="pokedex">
-                <Pokemon  pokemon={this.props.pokemon[this.state.position]} />
+                    <Pokemon pokemon={values.pokemons[values.position]} />
+                    <div className="pokedex-buttons-panel">
+                      <ButtonType values={values} type={false} />
+                      {btnsType}
+                    </div>
                 </div>
-                <button onClick={ this.nextPokemon }>Próximo Pokemon!</button>
-                
+                <Button key='next' values={values}/>
+
             </main>
         );
     }
