@@ -49,7 +49,7 @@ class Pokedex extends React.Component {
         }
 
         const filterTypes = [...this.props.pokemons].map(({ type}) => type);
-        const listTypes = filterTypes.filter((type, index, array) => array.indexOf(type) === index);
+        const listTypes = filterTypes.filter((type, index, array) => array.indexOf(type) === index);    
         const btnsType = listTypes.map((types, index) => <ButtonType key={index} values={values} type={types} />);
 
         return (
