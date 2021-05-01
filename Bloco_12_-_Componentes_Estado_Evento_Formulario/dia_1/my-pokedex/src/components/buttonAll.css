@@ -1,0 +1,14 @@
+.buttonAll-text {
+    background-color: black;
+    color: white;
+    font-size: 15px;
+    font-weight: 598;
+    text-align: center;
+}
+
+.filter-button {
+    background-color: orange;
+    height: 50px;
+    margin: 10px;
+    width: 80px;
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import Pokemon from './Pokemon';
 import Button from './Button';
 import ButtonType from './ButtonType';
+import ButtonAll from './ButtonAll';
 import './pokedex.css';
 
 class Pokedex extends React.Component {
@@ -56,7 +57,7 @@ class Pokedex extends React.Component {
                 <div className="pokedex">
                     <Pokemon pokemon={values.pokemons[values.position]} />
                     <div className="pokedex-buttons-panel">
-                      <ButtonType values={values} type={false} />
+                      <ButtonAll values={values} type={false} />
                       {btnsType}
                     </div>
                 </div>
