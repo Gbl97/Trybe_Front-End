@@ -9,7 +9,7 @@ import Tipo from './Tipo';
 import Curriculo from './Curriculo';
 import Cargo from './Cargo';
 import Descricao from './Descricao';
-
+import DataDisplay from './DataDisplay';
 class Forms extends React.Component {
     constructor() {
         super();
@@ -75,9 +75,10 @@ class Forms extends React.Component {
     submitForm = () => { this.setState({ submitted: true })};
 
     render() {
+        const { submitted } = this.state;
         return (
             <section>
-                <form onSubmit= {this.handleSubmit}>
+                <form onSubmit= {this.handleSubmit} valuesState={this.state}>
                     <fieldset>
                         <legend>Dados pessoais:</legend>
                         <NameInput handleChange={this.handleChange}/>
@@ -95,6 +96,7 @@ class Forms extends React.Component {
                          <Descricao handleChange={this.handleChange}/>
                     </fieldset>
                    <input type="submit" value="Enviar" onClick={ this.submitForm } />
+                   { submitted && <DataDisplay valuesState={this.state} />}
                 </form>
             </section>
         );
