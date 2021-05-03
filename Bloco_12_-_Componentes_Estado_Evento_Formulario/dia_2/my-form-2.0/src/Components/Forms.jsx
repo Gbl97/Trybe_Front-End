@@ -18,30 +18,73 @@ class Forms extends React.Component {
             endereco: '',
             cidade: '',
             estado: '',
-            gender: false
+            gender: false,
+            submitted: false,
         }
     }
 
+    validateEndereco = (endereco) => {
+        const removeChar = /[^a-zA-Z0-9 ]/g; // Remove caracteres especias e permite espaço em branco
+
+        // A função normalize permite substituir acentos por caracteres sem acentuação
+        const string = endereco.normalize("NFD").replace(removeChar, '');
+
+        return string;
+    };
+
     handleChange = ({ target }) => {
-        const { name } = target;
-        const value = target.type === 'radio' ? target.checked : target.value;
-        this.setState({ [name]: value });
+        let { name } = target;
+        let value = target.type === 'radio' ? target.checked : target.value;
+
+        if (name === 'nome') value = value.toUpperCase();
+        if (name === 'endereco') value = this.validateEndereco(value);
+
+        this.updateState(name, value);
     }
+
+    handleBlur = ({ target }) => {
+        let { name, value } = target;
+
+        // Regex (/^\d/): Verifica se a string começa com números
+        // Match(): verifica se o valor especificado corresponde
+        // a algum valores com os quais está sendo comparado
+
+        if (name === 'cidade') value = value.match(/^\d/) ? '' : value;
+
+        this.updateState(name, value);
+    }
+
+    updateState(name, value) {
+        this.setState((state) => ({
+            [name]: value,
+        }))
+    }
+
+
+    handleSubmit(event) {
+        alert(`Forms enviado`);
+        event.preventDefault();
+    }
+
+    submitForm = () => { this.setState({ submitted: true })};
 
     render() {
         return (
             <section>
-                <form >
+                <form onSubmit= {this.handleSubmit}>
                     <fieldset>
-                        <NameInput value={this.state.nome} handleChange={this.handleChange} />
+                        <NameInput handleChange={this.handleChange}/>
                         <Email value={this.state.email} handleChange={this.handleChange} />
                         <CPF value={this.state.cpf} handleChange={this.handleChange} />
-                        <Endereco value={this.state.endereco} handleChange={this.handleChange} />
-                        <Cidade value={this.state.cidade} handleChange={this.handleChange} />
-                        <Estado value={this.state.estado} handleChange={this.handleChange} />
+                        <Endereco  handleChange={this.handleChange} />
+                        <Cidade handleChange={this.handleChange} handleBlur={this.handleBlur} />
+                        <Estado value={this.state.estado} handleChange={this.handleChange} /> 
                         <Tipo value={this.state.gender} handleChange={this.handleChange} />
                     </fieldset>
-                    <button>Enviar</button>
+                    <fieldset>
+                        
+                    </fieldset>
+                   <input type="submit" value="Enviar" onClick={ this.submitForm } />
                 </form>
             </section>
         );

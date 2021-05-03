@@ -1,4 +1,5 @@
 import React from 'react';
+import states from './states';
 
 class Estado extends React.Component {
     render() {
@@ -7,9 +8,8 @@ class Estado extends React.Component {
         return (
             <label htmlFor="Estados">
                 Estado:
-                <select name="estado" id="Estados" value={value} onChange={handleChange}>
-                    <option value="SP">SP</option>
-                    <option value="RJ">RJ</option>
+                <select name="estado" id="Estados" required defaultValue="" value={value} onChange={handleChange}>
+                    {states.map((state, index) => (<option key={ index }>{ state }</option>))}
                 </select>
             </label>
         );
