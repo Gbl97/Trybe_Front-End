@@ -6,6 +6,9 @@ import Endereco from './Endereco';
 import Cidade from './Cidade';
 import Estado from './Estado';
 import Tipo from './Tipo';
+import Curriculo from './Curriculo';
+import Cargo from './Cargo';
+import Descricao from './Descricao';
 
 class Forms extends React.Component {
     constructor() {
@@ -19,6 +22,9 @@ class Forms extends React.Component {
             cidade: '',
             estado: '',
             gender: false,
+            curriculo: '',
+            cargo: '',
+            descricao: '',
             submitted: false,
         }
     }
@@ -73,6 +79,7 @@ class Forms extends React.Component {
             <section>
                 <form onSubmit= {this.handleSubmit}>
                     <fieldset>
+                        <legend>Dados pessoais:</legend>
                         <NameInput handleChange={this.handleChange}/>
                         <Email value={this.state.email} handleChange={this.handleChange} />
                         <CPF value={this.state.cpf} handleChange={this.handleChange} />
@@ -82,7 +89,10 @@ class Forms extends React.Component {
                         <Tipo value={this.state.gender} handleChange={this.handleChange} />
                     </fieldset>
                     <fieldset>
-                        
+                        <legend>Dados profissionais:</legend>
+                         <Curriculo handleChange={this.handleChange}/>
+                         <Cargo handleChange={this.handleChange}/>
+                         <Descricao handleChange={this.handleChange}/>
                     </fieldset>
                    <input type="submit" value="Enviar" onClick={ this.submitForm } />
                 </form>
