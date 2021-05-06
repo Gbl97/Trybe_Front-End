@@ -37,6 +37,17 @@ class Dogs extends Component {
         );
     }
 
+    shouldComponentUpdate = (nextProps, nextState) => {
+        if (nextState.dogObj.message.includes("terrier")) return false;
+        return true;
+    }
+
+    componentDidUpdate() {
+        localStorage.setItem("dogURL", this.state.dogObj.message);
+        const racaDog = this.state.dogObj.message.split("/")[4];
+        alert(racaDog);
+    }
+
 
     render() {
         if (this.state.dogObj === "") return "loading...";
