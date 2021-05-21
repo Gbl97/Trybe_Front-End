@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 
 class Dogs extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             dogObj: '',
+            name: '',
+            array: []
         }
 
         this.fetchDogs = this.fetchDogs.bind(this);
@@ -26,14 +28,23 @@ class Dogs extends Component {
     }
 
      componentDidMount() {
-        this.fetchDogs();
+        if (localStorage.namedDogURL) {
+            const storage = JSON.parse(localStorage.namedDogURL)
+            const lastDog = storage[storage.length - 1].message;
+            this.setState({
+                array: storage,
+                dogObj: { message: lastDog }
+            });
+        } else {
+            this.fetchDogs();
+        }
      }
 
 
 
     renderImageElement = () => {
         return (
-            <img src={ this.state.dogObj.message } alt="Random dog" />
+            <img src={ this.state.dogObj.message } alt={ this.state.dogObj.message } />
         );
     }
 
@@ -42,10 +53,21 @@ class Dogs extends Component {
         return true;
     }
 
-    componentDidUpdate() {
-        localStorage.setItem("dogURL", this.state.dogObj.message);
-        const racaDog = this.state.dogObj.message.split("/")[4];
-        alert(racaDog);
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.data !== this.state.dogObj) {
+            const racaDog = this.state.dogObj.message.split("/")[4];
+            alert(racaDog);
+        }
+    }
+
+    save() {
+        const { dogObj: { message }, name, array } = this.state;
+
+        const dogData = { message, name };
+        const newArray = [...array, dogData];
+        this.setState({ array: newArray });
+        this.setState({ name: ""});
+        localStorage.setItem("nameDogURL", JSON.stringify(newArray));
     }
 
 
@@ -55,6 +77,13 @@ class Dogs extends Component {
             <div>
                 <p>Dogs:</p>
                 <button onClick={this.fetchDogs}>Novo dog!</button>
+                <input 
+                  type="text"
+                  value={ this.state.name }
+                  onChange={ e => this.setState({ name: e.target.value })}
+                  placeholder="digite o nome do doguinho"
+                />
+                <button onClick={this.save}>Adicionar dog</button>
                 <span>
                   { this.renderImageElement() }
                 </span>
