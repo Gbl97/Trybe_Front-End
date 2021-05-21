@@ -1,0 +1,17 @@
+.button-text {
+    background-color: black;
+    color: white;
+    font-size: 15px;
+    font-weight: 598;
+    text-align: center;
+}
+
+.pokedex-button {
+    background-color: green;
+    height: 50px;
+    width: 100px;
+}
+
+.pokedex-button:disabled {
+    background-color: #D0D0D0;
+}
