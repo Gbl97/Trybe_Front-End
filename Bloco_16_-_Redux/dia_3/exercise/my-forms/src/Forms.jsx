@@ -70,14 +70,14 @@ class Forms extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-    nameStore: state.name,
-    emailStore: state.email,
-    enderecoStore: state.endereco
-});
+// const mapStateToProps = (state) => ({
+//     nameStore: state.name,
+//     emailStore: state.email,
+//     enderecoStore: state.endereco
+// });
 
 const mapDispatchToProps = (dispatch) => ({
-    inputDispatch: (...state) => dispatch(sendInput(...state)),
+    inputDispatch: (state) => dispatch(sendInput(state)),
 });
  
-export default connect(mapStateToProps, mapDispatchToProps)(Forms);
+export default connect(null, mapDispatchToProps)(Forms);

@@ -19,9 +19,9 @@ class User extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    nameStore: state.name,
-    emailStore: state.email,
-    enderecoStore: state.endereco
+    nameStore: state.formulario.forms.name,
+    emailStore: state.formulario.forms.email,
+    enderecoStore: state.formulario.forms.endereco
 });
  
 export default connect(mapStateToProps)(User);
