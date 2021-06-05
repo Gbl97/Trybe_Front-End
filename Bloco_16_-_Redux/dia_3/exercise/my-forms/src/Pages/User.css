@@ -1,0 +1,27 @@
+body {
+ margin: 0 auto;
+}
+
+#header-container {
+  align-items: center;
+  background-color: #8c8c8c;
+  display: flex;
+  height: 100px;
+  justify-content: center;
+}
+
+#section-container {
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  margin-top: 15px;
+  width: 400px;
+}
+
+#btn-voltar {
+  margin-bottom: 10px;
+}

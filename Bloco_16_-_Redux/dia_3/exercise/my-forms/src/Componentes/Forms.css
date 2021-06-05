@@ -1,0 +1,22 @@
+#form-container {
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    width: 400px;
+}
+
+#input-name {
+  padding-top: 10px;
+}
+
+#section-container-buttons {
+  margin-bottom: 10px;
+}
+
+#btn-enviar {
+  margin-right: 10px;
+}
