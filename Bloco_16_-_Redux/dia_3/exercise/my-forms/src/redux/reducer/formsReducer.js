@@ -4,9 +4,9 @@ import {
 
 const INITIAL_STATE = {
     forms: {
-      name: '',
-      email: '',
-      endereco: ''
+      name: 'null',
+      email: 'null',
+      endereco: 'null'
     }
 }
 

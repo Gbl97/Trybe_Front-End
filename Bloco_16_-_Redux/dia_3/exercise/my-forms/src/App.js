@@ -1,11 +1,11 @@
 import './App.css';
-import Forms from './Forms';
+import Rotas from '../src/Componentes/Rotas';
 
 function App() {
   return (
-    <div className="App">
-      <Forms />
-    </div>
+    <main className="App">
+      <Rotas />
+    </main>
   );
 }
 
